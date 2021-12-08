@@ -61,20 +61,22 @@
           animation={true}
         />
 ```
+![demo](https://user-images.githubusercontent.com/40633712/145182692-4186ff31-d3d6-4c9e-b0d9-16e9e2363166.gif)
+
 ### Properties
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `uri`      | `string` | notification messageId|
-| `path`      | `string` | notification messageId|
-| `viewBox`      | `string` | notification user_name |
-| `stokeColor`      | `integer` | notification is read or unread |
-| `fillColor`      | `string` | notification title |
-| `strokeWidth`      | `string` | notification body |
-| `duration`      | `string` | notification time |
-| `loop`      | `string` | notification title |
-| `backgroundColor`      | `string` | notification body |
-| `animation`      | `string` | notification time |
+| `uri`      | `string` | image uri need to pass for the conversion |
+| `path`      | `string` | svg path|
+| `viewBox`      | `string` | svg viewBox |
+| `stokeColor`      | `string` | svg border color |
+| `fillColor`      | `string` | svg fill |
+| `strokeWidth`      | `integer` | svg width |
+| `duration`      | `integer` | animation duration |
+| `loop`      | `boolean` | animation loop |
+| `backgroundColor`      | `string` | background color |
+| `animation`      | `boolean` | animation |
 
 
 
