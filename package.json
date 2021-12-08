@@ -1,6 +1,6 @@
 {
   "name": "react-native-image-to-svg",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "it converts image to svg",
   "main": "index.js",
   "scripts": {
