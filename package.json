@@ -1,0 +1,22 @@
+{
+  "name": "react-native-image-to-svg",
+  "version": "0.0.1",
+  "description": "it converts image to svg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TanmayaPradhan/react-native-image-to-svg.git"
+  },
+  "keywords": [
+    "reactNativeImageToSVG"
+  ],
+  "author": "tanmaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TanmayaPradhan/react-native-image-to-svg/issues"
+  },
+  "homepage": "https://github.com/TanmayaPradhan/react-native-image-to-svg#readme"
+}

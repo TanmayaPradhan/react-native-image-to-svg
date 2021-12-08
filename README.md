@@ -5,6 +5,7 @@
 
 `npm install --save @potrace`
 `npm install --save @react-native-svg`
+`npm install --save react-native-image-to-svg`
 
 
 ## Features
@@ -16,7 +17,8 @@
 ### Declarative Usage
 ```ruby
     import {Image} from 'react-native';
-    import convertImageToSvg from '../../utils/convertImageToSvg';
+    import {launchImageLibrary} from 'react-native-image-picker';
+    import {AnimatedSvgComponent, ConvertImageToSvg} from 'react-native-image-to-svg';
     import logo from '@imgs/logo.png';
 
     const func_convertLocalImgToSVG = async () => {
@@ -44,6 +46,20 @@
             }
         });
     };
+    const func_setImageResp = svgResp => {
+        setViewBox(svgResp?.viewBox);
+        setPath(svgResp?.path);
+    };
+    <AnimatedSvgComponent
+          path={path}
+          viewBox={viewBox}
+          fillColor={'#000'}
+          strokeWidth={5}
+          stokeColor="#98D1DA"
+          duration={4000}
+          backgroundColor="#fff"
+          animation={true}
+        />
 ```
 ### Properties
 
