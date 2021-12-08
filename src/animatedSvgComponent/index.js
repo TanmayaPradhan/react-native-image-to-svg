@@ -26,31 +26,30 @@ const AnimatedSvgComponent = ({
 
   useEffect(() => {
     if (animation) {
-      animatedPathLength.setValue(pathLength);
-      loop
-        ? Animated.loop(func_startLoopAnimation()).start()
-        : func_singleAnimataion();
+      animatedPathLength.setValue(0);
+      loop ? Animated.loop(func_startLoopAnimation()).start() : func_singleAnimataion();
     } else {
       animatedPathLength.setValue(0);
       animatedPathOpacity.setValue(1);
     }
-  });
+  },[pathLength]);
   const func_startLoopAnimation = () => {
     return Animated.sequence([
       Animated.timing(animatedPathLength, {
-        toValue: 0,
+        toValue: pathLength,
         duration: duration,
         useNativeDriver: true,
       }),
       Animated.timing(animatedPathOpacity, {
-        toValue: pathLength,
+        toValue: 1,
         duration: duration,
         useNativeDriver: true,
       }),
       Animated.timing(animatedPathLength, {
-        toValue: pathLength,
+        toValue: 0,
         useNativeDriver: true,
         duration: duration,
+        
       }),
       Animated.timing(animatedPathOpacity, {
         toValue: 0,
@@ -87,7 +86,8 @@ const AnimatedSvgComponent = ({
             fill={fillColor}
             fillOpacity={animatedPathOpacity}
             ref={animatedPathRef}
-            strokeDasharray={pathLength}
+            opacity={pathLength === 0 ? 0 : 1}
+            strokeDasharray={animatedPathLength}
             strokeDashoffset={animatedPathLength}
             onLayout={() =>
               setPathLength1(animatedPathRef?.current?.getTotalLength())

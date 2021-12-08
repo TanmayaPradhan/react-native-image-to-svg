@@ -1,76 +1,68 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  Text,
   Image,
 } from 'react-native';
 import {
   AnimatedSvgComponent,
   ConvertImageToSvg,
 } from 'react-native-image-to-svg';
+import panda from './panda.jpeg';
 import {launchImageLibrary} from 'react-native-image-picker';
 
-import panda from './panda.jpeg';
 const Main = () => {
-  const [path, setPath] = useState('');
-  const [viewBox, setViewBox] = useState('');
-  const imageToSvgContext = ConvertImageToSvg();
+  const [svgObj, setSvgObj] = useState({svgPath: '', svgViewBox: ''});
+  const convertImageToSvg = ConvertImageToSvg();
 
-  const func_openImagePicker = async () => {
-    launchImageLibrary(
-      {mediaType: 'photo', includeBase64: true},
-      async response => {
-        if (response.didCancel) {
-        } else if (response.errorCode) {
-        } else {
-          const [img] = response?.assets;
-          let resp = await imageToSvgContext.func_convertImgToSVG(img?.uri);
-          func_setImageResp(resp);
-        }
-      },
-    );
-  };
-  const func_convertLocalImgToSVG = async () => {
+  const func_localFileImage = async () => {
+    const imageUri = Image.resolveAssetSource(panda).uri;
     try {
-      const imageUri = Image.resolveAssetSource(panda).uri;
-      let resp = await imageToSvgContext.func_convertImgToSVG(imageUri);
-      func_setImageResp(resp);
+      const svgResp = await convertImageToSvg.func_convertImgToSVG(imageUri);
+      setSvgObj({svgPath: svgResp.path, svgViewBox: svgResp.viewBox});
     } catch (err) {
       console.error(err);
     }
   };
-  const func_setImageResp = svgResp => {
-    setViewBox(svgResp?.viewBox);
-    setPath(svgResp?.path);
+
+  const func_openImagePicker = () => {
+    launchImageLibrary({mediaType: 'photo'}).then(async response => {
+      if (response.didCancel) {
+        console.log('canceled');
+      } else if (response.errorCode) {
+        console.log('error');
+      } else {
+        const [img] = response.assets;
+        const svgResp = await convertImageToSvg.func_convertImgToSVG(img.uri);
+        setSvgObj({svgPath: svgResp.path, svgViewBox: svgResp.viewBox});
+      }
+    });
   };
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.animationWrapper}>
-        <AnimatedSvgComponent
-          path={path}
-          viewBox={viewBox}
-          fillColor={'#000'}
-          strokeWidth={5}
-          stokeColor="#98D1DA"
-          duration={4000}
-          backgroundColor="#fff"
-          animation={true}
-        />
+      <View style={styles.container}>
+        <View style={styles.svgContainer}>
+          <AnimatedSvgComponent
+            path={svgObj.svgPath}
+            viewBox={svgObj.svgViewBox}
+            strokeWidth={2}
+            fillColor={'#000'}
+            stokeColor={'red'}
+            animation={true}
+            loop={true}
+          />
+        </View>
+        <View style={styles.spacer} />
+        <TouchableOpacity onPress={func_openImagePicker} style={styles.button}>
+          <Text style={styles.text}>Image Picker</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={func_localFileImage} style={styles.button}>
+          <Text style={styles.text}>Local File Image</Text>
+        </TouchableOpacity>
       </View>
-      <View style={{flex: 1}} />
-      <TouchableOpacity onPress={func_openImagePicker} style={styles.buttons}>
-        <Text style={styles.text}>Image Picker</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={func_convertLocalImgToSVG}
-        style={styles.buttons}>
-        <Text style={styles.text}>Local Image</Text>
-      </TouchableOpacity>
-
-      {/* {newSvg !== '' && <SvgXml xml={newSvg} width="100%" height="100%" />} */}
     </SafeAreaView>
   );
 };
@@ -80,12 +72,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  animationWrapper: {height: 500},
-  buttons: {
-    marginHorizontal: 20,
-    backgroundColor: '#027',
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  svgContainer: {
+    height: 400,
+    backgroundColor: '#ccc',
+  },
+  spacer: {
+    flex: 1,
+  },
+  button: {
     height: 40,
-    marginVertical: 20,
+    backgroundColor: '#009866',
+    marginHorizontal: 20,
+    marginBottom: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
