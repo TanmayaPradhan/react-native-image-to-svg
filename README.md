@@ -14,7 +14,7 @@
 - User can filter the notifications by clicking filter button.
 
 ### Declarative Usage
-```http
+```ruby
     import {Image} from 'react-native';
     import convertImageToSvg from '../../utils/convertImageToSvg';
     import logo from '@imgs/logo.png';
