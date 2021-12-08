@@ -14,7 +14,7 @@
 - svg image animation
 - User can filter the notifications by clicking filter button.
 
-![demo](https://user-images.githubusercontent.com/40633712/145273377-e9e8ae04-b292-408b-9f82-c5dc606e7242.gif)
+<img src="https://user-images.githubusercontent.com/40633712/145273377-e9e8ae04-b292-408b-9f82-c5dc606e7242.gif" width="300" height="600">
 
 
 ### Declarative Usage
