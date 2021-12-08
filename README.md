@@ -14,6 +14,9 @@
 - svg image animation
 - User can filter the notifications by clicking filter button.
 
+![demo](https://user-images.githubusercontent.com/40633712/145273377-e9e8ae04-b292-408b-9f82-c5dc606e7242.gif)
+
+
 ### Declarative Usage
 ```ruby
     import {Image} from 'react-native';
@@ -61,7 +64,7 @@
           animation={true}
         />
 ```
-![demo](https://user-images.githubusercontent.com/40633712/145182692-4186ff31-d3d6-4c9e-b0d9-16e9e2363166.gif)
+
 
 ### Properties
 
