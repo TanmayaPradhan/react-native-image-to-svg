@@ -12,7 +12,6 @@
 
 - It converts image to svg and returns svg path
 - svg image animation
-- User can filter the notifications by clicking filter button.
 
 <img src="https://user-images.githubusercontent.com/40633712/145273377-e9e8ae04-b292-408b-9f82-c5dc606e7242.gif" width="300" height="600">
 
@@ -24,10 +23,11 @@
     import {AnimatedSvgComponent, ConvertImageToSvg} from 'react-native-image-to-svg';
     import logo from '@imgs/logo.png';
 
+    const convertImageToSvg = ConvertImageToSvg(); => it is a custom hook.call it inside the functional component
     const func_convertLocalImgToSVG = async () => {
         try {
         const imageUri = Image.resolveAssetSource(logo).uri;
-        let resp = await imageToSvgContext.func_convertImgToSVG(imageUri);
+        const resp = await convertImageToSvg.func_convertImgToSVG(imageUri);
         func_setImageResp(resp);
         } catch (err) {
         console.error(err);
@@ -44,7 +44,7 @@
             } else if (response.errorCode) {
             } else {
             const [img] = response?.assets;
-            let resp = await imageToSvgContext.func_convertImgToSVG(img?.uri);
+            let resp = await convertImageToSvg.func_convertImgToSVG(img.uri);
             func_setImageResp(resp);
             }
         });
